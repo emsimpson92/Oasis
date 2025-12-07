@@ -1,69 +1,78 @@
-import { Card, CardContent, CardMedia, Typography, Link } from '@mui/material'
-import { useTheme as useOasisTheme } from '../hooks/useTheme'
+import { Card, CardContent, CardMedia, Typography, Link } from '@mui/material';
+import { useTheme } from '../hooks/useTheme';
+
+const Styles = (theme) => {
+    return {
+        root: {
+            backgroundColor: theme.colors.header,
+            height: '100%',
+            display: 'flex',
+            width: '350px',
+            flexDirection: 'column',
+            transition: 'transform 0.3s ease',
+            cursor: 'pointer',
+            '&:hover': {
+                transform: 'translateY(-5px)',
+            }
+        },
+        cardTitle: {            
+            color: theme.colors.primary,
+            fontWeight: 'bold',
+        },
+        description: {            
+            color: theme.colors.text,
+            marginBottom: theme.spacing.md,
+            flex: 1,
+        },
+        learnMore: {            
+            color: theme.colors.accent,
+            textDecoration: 'underline',
+            textDecorationColor: theme.colors.accent,
+            textDecorationThickness: '2px',
+            textUnderlineOffset: '4px',
+            display: 'inline-block',
+            fontFamily: 'Cormorant Garamond, serif',
+            fontWeight: 'bold',
+            '&:hover': {
+                opacity: 0.8,
+            },
+        },
+        link: { 
+            textDecoration: 'none', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            height: '100%' 
+        },
+        content: {
+            display: 'flex', 
+            flexDirection: 'column',
+            flex: 1
+        }
+    }
+};
 
 function ActivityCard({ title, description, link, children }) {
-  const oasisTheme = useOasisTheme()
+    const theme = useTheme();
+    const styles = Styles(theme);
 
-  return (
-    <Card
-      sx={{
-        backgroundColor: oasisTheme.colors.header,
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        transition: 'transform 0.3s ease',
-        cursor: 'pointer',
-        '&:hover': {
-          transform: 'translateY(-5px)',
-        },
-      }}
-    >
-      {children ? (
-        <CardMedia component="div">{children}</CardMedia>
-      ) : (
-        <CardMedia
-          component="img"
-          height="200"
-          image="/vite.svg"
-          alt={title}
-        />
-      )}
-      <CardContent sx={{ flexGrow: 1 }}>
-        <Typography gutterBottom variant="h5"
-          sx={{
-            color: oasisTheme.colors.primary,
-            fontWeight: 'bold',
-          }}
-        >
-          {title}
-        </Typography>
-        <Typography
-          variant="body2"
-          sx={{
-            color: oasisTheme.colors.text,
-            marginBottom: oasisTheme.spacing.md,
-          }}
-        >
-          {description}
-        </Typography>
-        <Link
-          href={link}
-          sx={{
-            color: oasisTheme.colors.accent,
-            textDecoration: 'none',
-            fontWeight: 'bold',
-            borderBottom: `2px solid ${oasisTheme.colors.accent}`,
-            paddingBottom: '2px',
-            '&:hover': {
-              opacity: 0.8,
-            },
-          }}
-        >
-          Learn More →
-        </Link>
-      </CardContent>
-    </Card>
-  )
+    return (
+        <Card sx={styles.root}>
+            <Link href={link} style={styles.link}>
+                <CardMedia component="div">{children}</CardMedia>
+                <CardContent sx={styles.content}>
+                    <Typography gutterBottom variant="h5" style={styles.cardTitle}>
+                        {title}
+                    </Typography>
+                    <Typography variant="body2" style={styles.description}>
+                        {description}
+                    </Typography>
+                    <Typography sx={styles.learnMore}>
+                        Learn More →
+                    </Typography>
+                </CardContent>
+            </Link>
+        </Card>
+    )
 }
 
-export default ActivityCard
+export default ActivityCard;

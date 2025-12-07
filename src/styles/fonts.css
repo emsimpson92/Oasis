@@ -1,4 +1,11 @@
 @font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('./CormorantGaramond-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Arsenica Trial Regular';
   src: url('./ArsenicaTrial-Regular.ttf') format('truetype');
   font-weight: 400;
