@@ -9,13 +9,13 @@ import {
 import { useTheme } from '../hooks/useTheme';
 import ActivityCard from '../components/ActivityCard';
 import '../styles/fonts.css';
-import SpringsImg from '../assets/Springs.png';
-import DiningImg from '../assets/Dining.png';
-import NightlifeImg from '../assets/Nightlife.png';
-import EventsImg from '../assets/Events.png';
-import RecreationImg from '../assets/Recreation.png';
-import AccommodationsImg from '../assets/Accommodations.png';
-import OasisHomeImg from '../assets/OasisHome.png';
+import SpringsImg from '../assets/Springs.webp';
+import DiningImg from '../assets/Dining.webp';
+import NightlifeImg from '../assets/Nightlife.webp';
+import EventsImg from '../assets/Events.webp';
+import RecreationImg from '../assets/Recreation.webp';
+import AccommodationsImg from '../assets/Accommodations.webp';
+import OasisHomeImg from '../assets/OasisHome.webp';
 import DiscordIcon from '../assets/discord-icon.svg';
 
 const activities = [

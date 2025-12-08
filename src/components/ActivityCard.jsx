@@ -1,7 +1,8 @@
-import { Card, CardContent, CardMedia, Typography, Link } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
 
-const Styles = (theme) => {
+const Styles = (theme, hasLink) => {
     return {
         root: {
             backgroundColor: theme.colors.header,
@@ -9,11 +10,13 @@ const Styles = (theme) => {
             display: 'flex',
             width: '350px',
             flexDirection: 'column',
-            transition: 'transform 0.3s ease',
-            cursor: 'pointer',
-            '&:hover': {
-                transform: 'translateY(-5px)',
-            }
+            transition: hasLink ? 'transform 0.3s ease' : 'none',
+            cursor: hasLink ? 'pointer' : 'default',
+            ...(hasLink && {
+                '&:hover': {
+                    transform: 'translateY(-5px)',
+                }
+            })
         },
         cardTitle: {            
             color: theme.colors.primary,
@@ -57,24 +60,37 @@ const Styles = (theme) => {
 
 function ActivityCard({ title, description, link, children }) {
     const theme = useTheme();
-    const styles = Styles(theme);
+    const styles = Styles(theme, !!link);
+    const hasLink = !!link;
 
-    return (
-        <Card sx={styles.root}>
-            <Link href={link} style={styles.link}>
-                <CardMedia component="div">{children}</CardMedia>
-                <CardContent sx={styles.content}>
-                    <Typography gutterBottom variant="h5" style={styles.cardTitle}>
-                        {title}
-                    </Typography>
-                    <Typography variant="body2" style={styles.description}>
-                        {description}
-                    </Typography>
+    const cardContent = (
+        <>
+            <CardMedia component="div">{children}</CardMedia>
+            <CardContent sx={styles.content}>
+                <Typography gutterBottom variant="h5" style={styles.cardTitle}>
+                    {title}
+                </Typography>
+                <Typography variant="body2" style={styles.description}>
+                    {description}
+                </Typography>
+                {hasLink && (
                     <Typography sx={styles.learnMore}>
                         Learn More →
                     </Typography>
-                </CardContent>
-            </Link>
+                )}
+            </CardContent>
+        </>
+    );
+
+    return (
+        <Card sx={styles.root}>
+            {hasLink ? (
+                <RouterLink to={link} style={styles.link}>
+                    {cardContent}
+                </RouterLink>
+            ) : (
+                cardContent
+            )}
         </Card>
     )
 }
