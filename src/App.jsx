@@ -5,6 +5,8 @@ import { useTheme } from './hooks/useTheme';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
+import ContactPage from './pages/ContactPage';
+import EventRequest from './pages/EventRequest';
 const DiningPage = lazy(() => import('./pages/DiningPage'));
 const SpaWellnessPage = lazy(() => import('./pages/SpaWellnessPage'));
 const AccommodationsPage = lazy(() => import('./pages/AccommodationsPage'));
@@ -39,8 +41,8 @@ function App() {
             <Route path="/map" element={<Suspense fallback={background}><MapPage /></Suspense>} />
             <Route path="/about" element={<Suspense fallback={background}><ComingSoon /></Suspense>} />
             <Route path="/events/upcoming" element={<Suspense fallback={background}><ComingSoon /></Suspense>} />
-            <Route path="/events/request" element={<Suspense fallback={background}><ComingSoon /></Suspense>} />
-            <Route path="/contact" element={<Suspense fallback={background}><ComingSoon /></Suspense>} />
+            <Route path="/events/request" element={<Suspense fallback={background}><EventRequest /></Suspense>} />
+            <Route path="/contact" element={<Suspense fallback={background}><ContactPage /></Suspense>} />
             <Route path="*" element={<Suspense fallback={background}><NotFound /></Suspense>} />
           </Routes>
           <Footer />
